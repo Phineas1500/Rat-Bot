@@ -16,8 +16,8 @@ auth.set_access_token(access_token, access_token_secret)
 
 #tweetIDs = [0]
 api = tweepy.API(auth)
-toReply = ["AltPhinny","BadBoyHalo","Dream","tommyinnit","Ranboosaysstuff","TubboLive","JackManifoldTV","tommyaltinnit","quackity4k","KarlJacobs_","honkkarl","GeorgeNotFound","Quackity","sapnap","Skeppy","SaintsofGames","GeorgeNootFound","CptPuffy","TubboTWO","MrBeast","Nihaachu","DropsByPonk","billzo_","TinaKitten","hannahxxrose","VelvetIsCake","NotAntfrost","FoolishGamers_","Punztw","Spifeyy","snifferish","jschlatt","schlatt","dantdm","PunzOP"]
-tweetIDs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+toReply = ["AltPhinny","BadBoyHalo","Dream","tommyinnit","Ranboosaysstuff","TubboLive","JackManifoldTV","tommyaltinnit","quackity4k","KarlJacobs_","honkkarl","GeorgeNotFound","Quackity","sapnap","Skeppy","SaintsofGames","GeorgeNootFound","CptPuffy","TubboTWO","MrBeast","Nihaachu","DropsByPonk","billzo_","TinaKitten","NotAntfrost","FoolishGamers_","Punztw","Spifeyy","dantdm","PunzOP","Corpse_Husband","ranaltboo","NotAntfr0st","tomsimons","BoomerNA","FundyLive","SantaDecides"]
+tweetIDs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 #toReply = ["AltPhinny"] use this for testing
 #tweetIDs = [0]
 a = 1 #always 1, keeps loop running
@@ -28,13 +28,24 @@ z = 0 #z stores the last y value
 za = 0 #za stores the last z value
 while a == 1:
     #print(tweetIDs)
+    blockedTweetRandNumber = 0
     repeatTweet = False
-    if(b == 35):
+    #messageToElon = ""
+    if(b == 37):
         b = 0
-    tweets = api.user_timeline(screen_name = toReply[b], count=1)
+    #if(b == 32):
+    #    messageToElon = "Hi, Elon! "
+    print(toReply[b])
+    try:
+        tweets = api.user_timeline(screen_name = toReply[b], count=1)
+    except:
+        print("Can't reply to this user")
+        tweets = api.user_timeline(screen_name = "AltPhinny", count=1)
+        blockedTweetRandNumber = 123
+    #tweets = api.user_timeline(screen_name = toReply[b], count=1)
     for tweet in tweets:
         for i in range(len(tweetIDs)):
-            if(tweetIDs[i] == tweet.id):
+            if(tweetIDs[i] == tweet.id or blockedTweetRandNumber == 123):
                 repeatTweet = True
                 break
         created_at = tweet.created_at
@@ -48,12 +59,14 @@ while a == 1:
         tweetWords = str(tweet.text).lower()
         #print(tweetWords)
         filterDetect = False
-        filter = ["groom","disgust","piece of","pathetic","allegation","don't understand","manipulat","ptsd","this is fake","this isn't true","victim","support","pedo","harass","minor","died","passed away","devastat","heart broken"]
+        filter = ["groom","disgust","piece of","pathetic","allegation","don't understand","manipulat","ptsd","this is fake","this isn't true","victim","support","pedo","harass","minor","died","passed away","devastat","heart broken","for your loss","much love","take as long","take all the time","love ya","sorry","take care"]
         for i in filter:
           if i in tweetWords:
             filterDetect = True
             #print("Filter activated for Tweet")
-        if(repeatTweet == False and sentInTheHour == True and filterDetect == False):
+        respondToTweet = random.randint(1,2) #will respond if 1, won't if 2
+        print("Will it respond? " + str(respondToTweet))
+        if(repeatTweet == False and sentInTheHour == True and filterDetect == False and respondToTweet == 1):
             x = random.randint(1, 482)
             while(y == x or z == x or za == x):
                 x = random.randint(1, 482)
@@ -62,13 +75,13 @@ while a == 1:
                 tweetStatus = "Why are you looking at me?"           
             elif(x == 2):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125550295261186/photo/1"
-                tweetStatus = "I'm upfront"
+                tweetStatus = "I'm uPfront"
             elif(x == 3):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125596231225344/photo/1"
-                tweetStatus = "WHERE ARE THE TURTLES!"
+                tweetStatus = "WhERE ARE THE TURTLES!"
             elif(x == 4):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125652510400515/photo/1"
-                tweetStatus = "I'm listening"
+                tweetStatus = "I'm listenIng"
             elif(x == 5):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125710450552844/photo/1"
                 tweetStatus = "Look there!!"
@@ -77,13 +90,13 @@ while a == 1:
                 tweetStatus = "Hey there!"
             elif(x == 7):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125900779638786/photo/1"
-                tweetStatus = "What's the matter?"
+                tweetStatus = "What's the matter, " + toReply[b] + "?"
             elif(x == 8):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382125950540918789/photo/1"
-                tweetStatus = "Just chilling in Cedar Rapids"
+                tweetStatus = "Just chilliNg in Cedar Rapids"
             elif(x == 9):
                 mediaLink = " https://twitter.com/AltPhinny/status/1402599234713554950/photo/1"
-                tweetStatus = "I can't seem to turn off the computer..."
+                tweetStatus = "I can't seEm to turn off the computer..."
             elif(x == 10):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126054983229441/photo/1"
                 tweetStatus = "GIMME"
@@ -92,31 +105,31 @@ while a == 1:
                 tweetStatus = "Any left?"
             elif(x == 12):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126119357415424/photo/1"
-                tweetStatus = "I'm a professional"
+                tweetStatus = "I'm a professionAl"
             elif(x == 13):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126161724071937/photo/1"
                 tweetStatus = "Very comfy, I must say"
             elif(x == 14):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126206691246082/photo/1"
-                tweetStatus = "Let's have a staring contest"
+                tweetStatus = "Let's have a staring conteSt"
             elif(x == 15):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126252711108611/photo/1"
                 tweetStatus = "Had a good nap"
             elif(x == 16):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126297145556996/photo/1"
-                tweetStatus = "What's your obsession with cups?!"
+                tweetStatus = "What's your obsession wiTh cups?!"
             elif(x == 17):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126331949907970/photo/1"
-                tweetStatus = "It's hot in here!"
+                tweetStatus = "It's hot in hEre!"
             elif(x == 18):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126380834492416/photo/1"
-                tweetStatus = "Why's there a pacifier in my mouth?! I'm a dog, not a baby!"
+                tweetStatus = "Why's there a paCifier in my mouth?! I'm a dog, not a baby!"
             elif(x == 19):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126442713133062/photo/1"
                 tweetStatus = "I love stuffed animals"
             elif(x == 20):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126493871046666/photo/1"
-                tweetStatus = "Whoa there!"
+                tweetStatus = "Whoa tHere!"
             elif(x == 21):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126556357791748/photo/1"
                 tweetStatus = "How do I turn this thing on!"
@@ -128,7 +141,7 @@ while a == 1:
                 tweetStatus = "Still waiting in the Starbucks line..."
             elif(x == 24):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126691221397505/photo/1"
-                tweetStatus = "Ignore Bad, he's being annoying"
+                tweetStatus = "Ign.ore Bad, he's being annoying"
             elif(x == 25):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382126763128537095/photo/1"
                 tweetStatus = "Sleeping is my one passion"
@@ -176,22 +189,22 @@ while a == 1:
                 tweetStatus = "I had a long day at work..."
             elif(x == 40):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382127907749904388/photo/1"
-                tweetStatus = "Buy Bad's merch so I can get more treats!"
+                tweetStatus = "Buy Bad's merCh so I can get more treats!"
             elif(x == 41):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382127967040630789/photo/1"
                 tweetStatus = "I didn't see that!"
             elif(x == 42):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382128538711699457/photo/1"
-                tweetStatus = "This movie's horrible, but I can't look away"
+                tweetStatus = "This mOvie's horrible, but I can't look away"
             elif(x == 43):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382128619431006209/photo/1"
-                tweetStatus = "Why are you filming me?!"
+                tweetStatus = "Why are you filMing me?!"
             elif(x == 44):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382128672287625222/photo/1"
-                tweetStatus = "Did I hear the doorbell?!"
+                tweetStatus = "Did I hear the do/orbell?!"
             elif(x == 45):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382128727685992450/photo/1"
-                tweetStatus = "Let me just lay down"
+                tweetStatus = "Let me just lay down, " + toReply[b]
             elif(x == 46):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382128838994432004/photo/1"
                 tweetStatus = "I'm a tea connoisseur"
@@ -260,7 +273,7 @@ while a == 1:
                 tweetStatus = "Could you get the remote? I'm too wrapped up in the blanket."      
             elif(x == 68):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382327498881531905/photo/1"
-                tweetStatus = "Let's continue the walk!"      
+                tweetStatus = "Let's continue the walk, " + toReply[b] + "!"      
             elif(x == 69):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382327529424498692/photo/1"
                 tweetStatus = "ARE SKEPPY AND BAD MEETING UP?!"      
@@ -281,16 +294,16 @@ while a == 1:
                 tweetStatus = "I smell treats"      
             elif(x == 75):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382328120699719688/photo/1"
-                tweetStatus = "I wish dogs could eat chocolate"      
+                tweetStatus = "I wish dogs could eat chocolate (don't give your dog chocolate, it's toXic)"      
             elif(x == 76):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382328169089355778/photo/1"
                 tweetStatus = "Are there games on your phone?"      
             elif(x == 77):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382328230343016450/photo/1"
-                tweetStatus = "POG"      
+                tweetStatus = "POg"      
             elif(x == 78):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382329152787873797/photo/1"
-                tweetStatus = "Just passed my driving test! Now I'm getting groceries from Wal-Mart."      
+                tweetStatus = "Just passed my driving test! Now I'm getting grOceries from Wal-Mart."      
             elif(x == 79):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382329197981491202/photo/1"
                 tweetStatus = "TREATS"      
@@ -340,8 +353,10 @@ while a == 1:
                 mediaLink = " https://twitter.com/AltPhinny/status/1382728797028499459/photo/1"
                 tweetStatus = "uhhhhh, I'm not part of this"
             elif(x == 95):
+                alsoNow = datetime.now()
+                currentTime = alsoNow.strftime("%H:%M")
                 mediaLink = " https://twitter.com/AltPhinny/status/1382728843648196612/photo/1"
-                tweetStatus = "Why are you livestreaming at 11pm again?"
+                tweetStatus = "Why are you livestreaming at " + currentTime + " again (GMT/BST)?"
             elif(x == 96):
                 mediaLink = " https://twitter.com/AltPhinny/status/1382728911558123521/photo/1"
                 tweetStatus = "Chocolate, my forbidden pleasure..."
@@ -392,7 +407,7 @@ while a == 1:
                 tweetStatus = "I've always wondered what the white part of my eye is (it's a sclera)"
             elif(x == 112):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383048858465357834/photo/1"
-                tweetStatus = "I wasn't able to get my Youtooz!! ;("
+                tweetStatus = "I wasn't able to get my Youtooz ;( (I got it!!)"
             elif(x == 113):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383048882872053769/photo/1"
                 tweetStatus = "This excludes @Quackity for kicking me"
@@ -401,7 +416,7 @@ while a == 1:
                 tweetStatus = "Bad likes taking pictures of when I'm crying >:("
             elif(x == 115):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383049630594764800/photo/1"
-                tweetStatus = "I'm a cutie without putting in any effort"
+                tweetStatus = "I'm a cutie without putting in any eFfort"
             elif(x == 116):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383049731761434625/photo/1"
                 tweetStatus = "ACHOO!!"
@@ -416,16 +431,16 @@ while a == 1:
                 tweetStatus = "I've even a cutie upside-down"
             elif(x == 120):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383050341948743681/photo/1"
-                tweetStatus = "I'm not liking how my neck feels"
+                tweetStatus = "I'm not liking hoW my neck feels"
             elif(x == 121):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383050482399199232/photo/1"
-                tweetStatus = "This is humiliating, Bad"
+                tweetStatus = "This is humiliAting, Bad"
             elif(x == 122):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383050845416259586/photo/1"
                 tweetStatus = "You're not posting pictures of me like this to Twitter!"
             elif(x == 123):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383051396510007298/photo/1"
-                tweetStatus = "Fine, you got your photo-op. Now where are my treats?"
+                tweetStatus = "Fine, you got your photo-op, " + toReply[b] + ". Now where are my treats?"
             elif(x == 124):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383051464550014989/photo/1"
                 tweetStatus = "I'm feeling dizzy..."
@@ -434,10 +449,10 @@ while a == 1:
                 tweetStatus = "I'm not sure what this image is supposed to be"
             elif(x == 126):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383052013018173440/photo/1"
-                tweetStatus = "Panting is supposed to make my temperature cool down"
+                tweetStatus = "PantinG is supposed to make my temperature cool down"
             elif(x == 127):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383052544793010176/photo/1"
-                tweetStatus = "I look like a rose with seeds"
+                tweetStatus = "I looK like a rose with seeds"
             elif(x == 128):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383052612602368005/photo/1"
                 tweetStatus = "I'm currently playing hide and seek"
@@ -476,10 +491,10 @@ while a == 1:
                 tweetStatus = "Potato chips are just empty calories, and I'm not eating them"
             elif(x == 140):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383053791898009603/photo/1"
-                tweetStatus = "You see? Bad's hopeless..."
+                tweetStatus = "You see? " + toReply[b] + "'s hopeless..."
             elif(x == 141):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383053862349762567/photo/1"
-                tweetStatus = "I accept any gifts you have for me"
+                tweetStatus = "I accept any gifts you have for me, " + toReply[b]
             elif(x == 142):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383054121486450689/photo/1"
                 tweetStatus = "Why did Phineas even add this picture to the bot? There's nothing to it"
@@ -536,7 +551,7 @@ while a == 1:
                 tweetStatus = "I love filters!!"
             elif(x == 160):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383056841052131333/photo/1"
-                tweetStatus = "I know you have snacks, so hand them over peacefully"
+                tweetStatus = toReply[b] + ", I know you have snacks, so hand them over peacefully"
             elif(x == 161):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383056944777289730/photo/1"
                 tweetStatus = "I think I'm in need of a good scrub"
@@ -602,7 +617,7 @@ while a == 1:
                 tweetStatus = "When I'm sleeping, I only think about treats, language, muffins, and 14"
             elif(x == 182):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383092260984786945/photo/1"
-                tweetStatus = "Do you play Club Penguin?"
+                tweetStatus = "Do you play Club Penguin, " + toReply[b] + "?"
             elif(x == 183):
                 mediaLink = " https://twitter.com/AltPhinny/status/1383092347379007491/photo/1"
                 tweetStatus = "Are you subscribed to BadBoyHalo and Skeppy? (and PhineasCPR, shhhhh)"
@@ -650,7 +665,7 @@ while a == 1:
                 tweetStatus = "Peek-a-boo!"
             elif(x == 198):
                 mediaLink = " https://twitter.com/AltPhinny/status/1386847122293678080/photo/1"
-                tweetStatus = "There's someone behind me..."
+                tweetStatus = "There's someone behind me, " + toReply[b] + "..."
             elif(x == 199):
                 mediaLink = " https://twitter.com/AltPhinny/status/1386847215650476043/photo/1"
                 tweetStatus = "Flip the camera!!"
@@ -692,7 +707,7 @@ while a == 1:
                 tweetStatus = "The pollen keeps getting into my eyes!!"
             elif(x == 212):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388260026268147718/photo/1"
-                tweetStatus = "La la la!"
+                tweetStatus = "La la la la, la la la la! " + toReply[b] + "'s World!"
             elif(x == 213):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388260045998198786/photo/1"
                 tweetStatus = "Mlem"
@@ -707,7 +722,7 @@ while a == 1:
                 tweetStatus = "Zzzzzzzz"
             elif(x == 217):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388263000562356225/photo/1"
-                tweetStatus = "Please, sir, I want some more"
+                tweetStatus = "Please, " + toReply[b] + ", I want some more"
             elif(x == 218):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388263105768079362/photo/1"
                 tweetStatus = "Suffering from success"
@@ -764,7 +779,7 @@ while a == 1:
                 tweetStatus = "Am I sitting on a shoe?!"
             elif(x == 236):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388265285120049159/photo/1"
-                tweetStatus = "You are NOT taking me to the vet"
+                tweetStatus = "You are NOT taking me to the vet, " + toReply[b]
             elif(x == 237):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388267671368654853/photo/1"
                 tweetStatus = "Just got a shot from the vet. Get yours"
@@ -797,13 +812,13 @@ while a == 1:
                 tweetStatus = "Made ya look!"
             elif(x == 247):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388268546153754625/photo/1"
-                tweetStatus = "Don't disturb me"
+                tweetStatus = "Don't disturb me, " + toReply[b]
             elif(x == 248):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388268597366169603/photo/1"
                 tweetStatus = "You disturbed me"
             elif(x == 249):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388268778220408839/photo/1"
-                tweetStatus = "Thank you for covering up the sun"
+                tweetStatus = "Thank you for covering up the sun, " + toReply[b]
             elif(x == 250):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388269081023889408/photo/1"
                 tweetStatus = "Do you have games on your pager?"
@@ -836,7 +851,7 @@ while a == 1:
                 tweetStatus = "Did you know that 0! = 1?"
             elif(x == 260):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388269963169968129/photo/1"
-                tweetStatus = "Tonight I eat like a queen!"
+                tweetStatus = "Tonight, I eat like a queen!"
             elif(x == 261):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388270052550524931/photo/1"
                 tweetStatus = "Take my hand and hold on tight"
@@ -848,7 +863,7 @@ while a == 1:
                 tweetStatus = "You didn't watch Stampy as a kid? Disappointing..."
             elif(x == 264):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388270322454040579/photo/1"
-                tweetStatus = "Beware! I'm a dangerous doggo"
+                tweetStatus = "Beware, " + toReply[b] + "! I'm a dangerous doggo"
             elif(x == 265):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388270404716879872/photo/1"
                 tweetStatus = "Phineas still hasn't finished the captions..."
@@ -872,16 +887,16 @@ while a == 1:
                 tweetStatus = "I cannot resist the pickle"
             elif(x == 272):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388272236608376832/photo/1"
-                tweetStatus = "Why'd you wake me up in the middle of the night?!"
+                tweetStatus = "Why'd you wake me up in the middle of the night, " + toReply[b] + "?!"
             elif(x == 273):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388272357907832836/photo/1"
-                tweetStatus = "Gimme some of that!"
+                tweetStatus = "Gimme some of that, " + toReply[b] + "!"
             elif(x == 274):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388272634266333187/photo/1"
                 tweetStatus = "Let me rest in peace!"
             elif(x == 275):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388272822728994819/photo/1"
-                tweetStatus = "I just remembered that I have another homework assignment due"
+                tweetStatus = "I just remembered that I have another homework assignment due (bots incoming)"
             elif(x == 276):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388273031081074690/photo/1"
                 tweetStatus = "Why do I stand up so often..."
@@ -893,10 +908,10 @@ while a == 1:
                 tweetStatus = "I guess I'm pouting for some reason now..."
             elif(x == 279):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388273450255589376/photo/1"
-                tweetStatus = "My hair is cut and I am now sad"
+                tweetStatus = "My hair is cut, and I am now sad"
             elif(x == 280):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388273893908140033/photo/1"
-                tweetStatus = "Why put me through this humiliation?"
+                tweetStatus = "Why put me through this humiliation, " + toReply[b] + "?"
             elif(x == 281):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388324576841588739/photo/1"
                 tweetStatus = "I am lit"
@@ -905,13 +920,13 @@ while a == 1:
                 tweetStatus = "I look at right now and see glimpses of my past"
             elif(x == 283):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388324631971500034/photo/1"
-                tweetStatus = "Follow me, Dream!"
+                tweetStatus = "Unblock me, Dream!"
             elif(x == 284):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388324735646371840/photo/1"
                 tweetStatus = "Will Thomas the Tank Engine Innit follow me?"
             elif(x == 285):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388324843205103625/photo/1"
-                tweetStatus = "I will finally celebrate my birthday when Skeppy follows me"
+                tweetStatus = "I will finally celebrate my birthday when " + toReply[b] + " follows me"
             elif(x == 286):
                 mediaLink = " https://twitter.com/AltPhinny/status/1388324922217353226/photo/1"
                 tweetStatus = "This picture is weird..."
@@ -920,7 +935,7 @@ while a == 1:
                 tweetStatus = "There is no such thing as Rat, only fur"
             elif(x == 288):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412076085144133632/photo/1"
-                tweetStatus = "Amazing!"
+                tweetStatus = "Amazing, " + toReply[b] + "!"
             elif(x == 289):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412076445858402309/photo/1"
                 tweetStatus = "Umm..."
@@ -935,7 +950,7 @@ while a == 1:
                 tweetStatus = "Quack!"
             elif(x == 293):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412076609046298628/photo/1"
-                tweetStatus = "I am deeply hurt"
+                tweetStatus = "I am deeply hurt, " + toReply[b]
             elif(x == 294):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412076646979547142/photo/1"
                 tweetStatus = "Dogs don't eat PB&J!"
@@ -980,10 +995,10 @@ while a == 1:
                 tweetStatus = "NOM!"
             elif(x == 308):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077611782660099/photo/1"
-                tweetStatus = "Uhh, time to move on"
+                tweetStatus = "Uhh, time to move on, " + toReply[b]
             elif(x == 309):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077653272707072/photo/1"
-                tweetStatus = "Why have we stopped?"
+                tweetStatus = "Why have we stopped, " + toReply[b] + "?"
             elif(x == 310):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077669630492673/photo/1"
                 tweetStatus = "Post this to my Instagram!"
@@ -998,13 +1013,13 @@ while a == 1:
                 tweetStatus = "Whoa there!"
             elif(x == 314):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077777373831175/photo/1"
-                tweetStatus = "Are you done there?"
+                tweetStatus = "Are you done there, " + toReply[b] + "?"
             elif(x == 315):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077803844034562/photo/1"
                 tweetStatus = "Yum!"
             elif(x == 316):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077846445625347/photo/1"
-                tweetStatus = "I am pleading with you to give me treats"
+                tweetStatus = "I am pleading with " + toReply[b] + " to give me treats"
             elif(x == 317):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412077870231568391/photo/1"
                 tweetStatus = "*Licks*"
@@ -1034,16 +1049,16 @@ while a == 1:
                 tweetStatus = "EEEEEEE!!"
             elif(x == 326):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412078096900149255/photo/1"
-                tweetStatus = "Let me out :("
+                tweetStatus = "Let me out, " + toReply[b] + " :("
             elif(x == 327):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412078123068411910/photo/1"
                 tweetStatus = "The snack...is right there"
             elif(x == 328):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412088738105237507/photo/1"
-                tweetStatus = "Just let me sleep"
+                tweetStatus = "Just let me sleep, " + toReply[b]
             elif(x == 329):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412088794287849477/photo/1"
-                tweetStatus = "Do you like my Dream shirt?"
+                tweetStatus = "Do you like my Dream shirt, " + toReply[b] + "?"
             elif(x == 330):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412088816186363904/photo/1"
                 tweetStatus = "Esta caliente"
@@ -1067,7 +1082,7 @@ while a == 1:
                 tweetStatus = "Why did @phineas1500 add this..."
             elif(x == 337):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089043391848454/photo/1"
-                tweetStatus = "I am shocked"
+                tweetStatus = "I am shocked, " + toReply[b]
             elif(x == 338):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089070801543171/photo/1"
                 tweetStatus = "I don't like potato"
@@ -1082,7 +1097,7 @@ while a == 1:
                 tweetStatus = "Bad and I with our friends!"
             elif(x == 342):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089200636203017/photo/1"
-                tweetStatus = "Leave me alone!"
+                tweetStatus = "Leave me alone, " + toReply[b] + "!"
             elif(x == 343):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089224866799617/photo/1"
                 tweetStatus = "Hewwo"
@@ -1100,10 +1115,10 @@ while a == 1:
                 tweetStatus = "Night night!"
             elif(x == 348):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089363509436417/photo/1"
-                tweetStatus = "I am worried about Ranboo's sleepwalking"
+                tweetStatus = "I am worried about " + toReply[b] + "'s sleepwalking"
             elif(x == 349):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089386699739138/photo/1"
-                tweetStatus = "I yoinked that finger!"
+                tweetStatus = "I yoinked " + toReply[b] + "'s finger!"
             elif(x == 350):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089412935168011/photo/1"
                 tweetStatus = "Nose reveal"
@@ -1130,7 +1145,7 @@ while a == 1:
                 tweetStatus = "Another repeat pic I believe!"
             elif(x == 358):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412089705802440706/photo/1"
-                tweetStatus = "GET OFF MINECRAFT!"
+                tweetStatus = "GET OFF MINECRAFT, " + toReply[b] + "!"
             elif(x == 359):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090131364913157/photo/1"
                 tweetStatus = "Who will nom?"
@@ -1142,7 +1157,7 @@ while a == 1:
                 tweetStatus = "Head tilts are a guaranteed cuteness boost"
             elif(x == 362):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090367500038146/photo/1"
-                tweetStatus = "This is like that JSchatt pic"
+                tweetStatus = "This is like that jschatt pic"
             elif(x == 363):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090476010819585/photo/1"
                 tweetStatus = "*Yawns*"
@@ -1163,13 +1178,13 @@ while a == 1:
                 tweetStatus = "As always, I'm a tall giant"
             elif(x == 369):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090635130114048/photo/1"
-                tweetStatus = "Don't worry, I'm just watching"
+                tweetStatus = "Don't worry, " + toReply[b] + ", I'm just watching"
             elif(x == 370):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090737345302528/photo/1"
                 tweetStatus = "WHAT IN THE"
             elif(x == 371):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090776989929475/photo/1"
-                tweetStatus = "Baths are TERRIBLE"
+                tweetStatus = "Baths are TERRIBLE, " + toReply[b]
             elif(x == 372):
                 mediaLink = " https://twitter.com/AltPhinny/status/1412090823102107650/photo/1"
                 tweetStatus = "Cozy"
@@ -1493,10 +1508,10 @@ while a == 1:
                 tweetStatus = "Drip Rat"
             elif(x == 479):
                 mediaLink = " https://twitter.com/AltPhinny/status/1422223253372907522/photo/1"
-                tweetStatus = "This looks unusual..."
+                tweetStatus = "This looks unusual, " + toReply[b] + "..."
             elif(x == 480):
                 mediaLink = " https://twitter.com/AltPhinny/status/1422291405268033539/photo/1"
-                tweetStatus = "Gogi is a Rat Stan!"
+                tweetStatus = "Gogy is a Rat Stan!"
             elif(x == 481):
                 mediaLink = " https://twitter.com/AltPhinny/status/1422292106249375749/photo/1"
                 tweetStatus = "It's a struggle being me"
@@ -1511,14 +1526,14 @@ while a == 1:
             y = x
             c = c + 1
             try:
-              api.update_status(status = tweetStatus + " [" + str(c) + "] " + mediaLink, in_reply_to_status_id = tweet.id, auto_populate_reply_metadata=True)
+              api.update_status(status = tweetStatus + " [Check pinned if marked sensitive (" + str(x) + ")] " + mediaLink, in_reply_to_status_id = tweet.id, auto_populate_reply_metadata=True)
             except:
               print("Can't reply to that tweet")
 
             #tweetIDs.insert(len(tweetIDs), tweet.id)
-            tweetIDs[b] = tweet.id
+        tweetIDs[b] = tweet.id
     b = b + 1
     #if(c == 3600):
     #    tweetIDs = [0]
     #    c = 0
-    time.sleep(1)
+    time.sleep(3)
